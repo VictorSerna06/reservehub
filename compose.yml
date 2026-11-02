@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:18
+    container_name: reservehub_db
+    restart: always
+    environment:
+      POSTGRES_DB: reservehub
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - reservehub_data:/var/lib/postgresql
+      - ./database:/docker-entrypoint-initdb.d:ro
+
+volumes:
+  reservehub_data:
